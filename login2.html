@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#4CAF50">
-  <title>DOIN - Login</title>
+  <title>Login - DOIN</title>
   <style>
     body {
       margin: 0;
@@ -13,8 +13,8 @@
       color: #fff;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       text-align: center;
     }
@@ -63,13 +63,41 @@
       font-size: 0.8rem;
     }
   </style>
+  <script>
+    function login(event) {
+      event.preventDefault();
+      
+      // Lista de usuários válidos (apenas para testes)
+      const users = [
+        { username: "admin", password: "12345" },
+        { username: "doin", password: "mobilidade" }
+      ];
+
+      // Pegando os valores dos inputs
+      let usuario = document.getElementById("usuario").value;
+      let senha = document.getElementById("senha").value;
+      let errorMsg = document.getElementById("error-msg");
+
+      // Verifica se existe um usuário correspondente
+      let usuarioValido = users.find(user => user.username === usuario && user.password === senha);
+
+      if (usuarioValido) {
+        window.location.href = "dashboard.html"; // Redireciona para o dashboard
+      } else {
+        errorMsg.style.display = "block"; // Exibe mensagem de erro
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="container">
     <h2>Login</h2>
-    <input type="text" placeholder="Usuário" />
-    <input type="password" placeholder="Senha" />
-    <button class="login-btn">Entrar</button>
+    <form onsubmit="login(event)">
+      <input type="text" id="usuario" placeholder="Usuário" required>
+      <input type="password" id="senha" placeholder="Senha" required>
+      <button type="submit" class="login-btn">Entrar</button>
+    </form>
+    <p class="error-msg" id="error-msg">Usuário ou senha incorretos.</p>
   </div>
   <div class="footer">
     <p>&copy; 2025 DOIN. Todos os direitos reservados.</p>
