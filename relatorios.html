@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4CAF50">
+  <title>DOIN - Relatórios</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #4CAF50, #2196F3);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+    }
+    th {
+      background: #4CAF50;
+      color: #fff;
+    }
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Relatórios de Passageiros</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Entrada</th>
+          <th>Saída</th>
+          <th>Não Pagantes</th>
+          <th>Linha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01/02/2025</td>
+          <td>120</td>
+          <td>40</td>
+          <td>5</td>
+          <td>101</td>
+        </tr>
+        <tr>
+          <td>02/02/2025</td>
+          <td>130</td>
+          <td>50</td>
+          <td>3</td>
+          <td>102</td>
+        </tr>
+        <!-- Adicione mais linhas conforme necessário -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 DOIN. Todos os direitos reservados.</p>
+  </div>
+
+</body>
+</html>
