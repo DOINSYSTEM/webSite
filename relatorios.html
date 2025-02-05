@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#4CAF50">
   <title>DOIN - Relatórios</title>
   <style>
     body {
@@ -13,84 +12,145 @@
       color: #fff;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 10px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 15px;
+      animation: slideIn 1.5s forwards;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.2);
+      transition: background 0.3s;
       text-align: center;
     }
-    .container {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-      width: 90%;
-      max-width: 600px;
+
+    .nav a:hover {
+      background: rgba(0, 0, 0, 0.4);
     }
-    h1 {
-      margin-bottom: 20px;
-    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 0.9rem;
+      margin-top: 10px;
+      overflow-x: auto;
+      display: block;
     }
-    th, td {
-      padding: 10px;
-      text-align: center;
+
+    table, th, td {
       border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
       background: rgba(255, 255, 255, 0.8);
       color: #333;
+      font-size: 0.9rem;
     }
-    th {
-      background: #4CAF50;
-      color: #fff;
-    }
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.8rem;
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .content {
+        width: 100%;
+        padding: 10px;
+      }
+
+      th, td {
+        font-size: 0.8rem;
+        padding: 6px;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>DOIN - Relatórios</h1>
+    <p>Análise detalhada e dados importantes.</p>
+  </header>
 
-  <div class="container">
-    <h1>Relatórios de Passageiros</h1>
+  <div class="nav">
+    <a href="dashboard.html">Voltar</a>
+  </div>
 
+  <div class="content">
+    <h3>Relatório de Riscos:</h3>
     <table>
       <thead>
         <tr>
-          <th>Data</th>
-          <th>Entrada</th>
-          <th>Saída</th>
-          <th>Não Pagantes</th>
           <th>Linha</th>
+          <th>Passageiros</th>
+          <th>Capacidade Máxima</th>
+          <th>Riscos</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>01/02/2025</td>
-          <td>120</td>
-          <td>40</td>
-          <td>5</td>
           <td>101</td>
+          <td>150</td>
+          <td>100</td>
+          <td>Excesso de peso pode causar desgaste acelerado nos pneus e risco à segurança.</td>
         </tr>
         <tr>
-          <td>02/02/2025</td>
-          <td>130</td>
-          <td>50</td>
-          <td>3</td>
           <td>102</td>
+          <td>120</td>
+          <td>100</td>
+          <td>Excesso de passageiros pode comprometer a segurança.</td>
         </tr>
-        <!-- Adicione mais linhas conforme necessário -->
       </tbody>
     </table>
   </div>
-
-  <div class="footer">
-    <p>&copy; 2025 DOIN. Todos os direitos reservados.</p>
-  </div>
-
 </body>
 </html>
