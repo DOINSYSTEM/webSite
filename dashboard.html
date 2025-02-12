@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#4CAF50">
   <title>DOIN - Dashboard</title>
+  
+  <!-- Estilo do Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
   <style>
     body {
       margin: 0;
@@ -26,15 +30,6 @@
       margin-bottom: 20px;
     }
 
-    header h1 {
-      font-size: 2rem;
-      margin: 10px 0;
-    }
-
-    header p {
-      font-size: 1rem;
-    }
-
     .nav {
       display: flex;
       justify-content: space-between;
@@ -42,24 +37,19 @@
       max-width: 400px;
     }
 
-    .nav a, .logout-btn {
+    .nav a {
       text-decoration: none;
       color: #fff;
       font-weight: bold;
       padding: 8px 15px;
       border-radius: 5px;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.2);
       transition: background 0.3s;
       text-align: center;
-      flex: 1;
-      margin: 5px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      border: none;
     }
 
-    .nav a:hover, .logout-btn:hover {
-      background: rgba(0, 0, 0, 0.5);
+    .nav a:hover {
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .content {
@@ -72,15 +62,9 @@
       text-align: center;
     }
 
-    h3 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
     .map {
-      height: 200px;
+      height: 300px;
       width: 100%;
-      background: #ccc;
       border: 2px solid #4CAF50;
       border-radius: 8px;
       margin-top: 15px;
@@ -90,7 +74,6 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
-      font-size: 0.9rem;
     }
 
     th, td {
@@ -116,7 +99,7 @@
 
   <div class="nav">
     <a href="relatorios.html">Relatórios</a>
-    <button class="logout-btn" onclick="logout()">Sair</button>
+    <a href="login.html" class="logout-btn">Sair</a>
   </div>
 
   <div class="content">
@@ -149,16 +132,56 @@
       </tbody>
     </table>
 
-    <div class="map">Mapa com sensores</div>
+    <h3>Mapa em Tempo Real</h3>
+    <div id="map" class="map"></div>
   </div>
 
   <footer>&copy; 2025 DOIN. Todos os direitos reservados.</footer>
 
+  <!-- Script do Leaflet -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
   <script>
-    function logout() {
-      // lógica para logout
-      alert("Saindo...");
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      const map = L.map('map').setView([0, 0], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      const customIcon = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/128/684/684908.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      });
+
+      const marker = L.marker([0, 0], { icon: customIcon }).addTo(map)
+        .bindPopup("Localizando...");
+
+      function getLocation() {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.watchPosition(
+            function (position) {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+              
+
+              map.setView([lat, lon], 15);
+              marker.setLatLng([lat, lon]).setPopupContent("Você está aqui!").openPopup();
+            },
+            function (error) {
+              alert("Erro ao obter localização: " + error.message);
+            },
+            { enableHighAccuracy: true, maximumAge: 10000 }
+          );
+        } else {
+          alert("Geolocalização não suportada pelo seu navegador.");
+        }
+      }
+
+      getLocation();
+    });
   </script>
 </body>
 </html>
