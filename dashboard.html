@@ -10,17 +10,22 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   
   <style>
-    body {
+    /* Resetando as margens e padding para garantir o layout correto */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, #4CAF50, #2196F3);
       color: #fff;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
-      height: 100vh;
-      overflow-y: auto;
+      justify-content: flex-start;
+      min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
       padding: 20px;
     }
 
@@ -53,14 +58,16 @@
       background: rgba(0, 0, 0, 0.4);
     }
 
-    .content {
+    main {
       width: 100%;
-      max-width: 500px; /* Ajuste o tamanho máximo do quadro */
+      max-width: 600px; /* Ajusta a largura máxima */
       background: rgba(255, 255, 255, 0.2);
       padding: 20px; /* Aumente o padding para não ficar apertado */
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: center;
+      box-sizing: border-box; /* Garante que o padding não saia para fora da caixa */
+      margin-bottom: 30px; /* Adiciona uma margem inferior para dar espaçamento */
     }
 
     .map {
@@ -89,6 +96,13 @@
       margin-top: 15px;
       font-size: 0.8rem;
       text-align: center;
+      background: transparent; /* Remove o fundo da barra verde */
+      color: #fff; /* Mantém o texto branco */
+    }
+
+    /* Controle de rolagem no caso de muito conteúdo */
+    body {
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -103,7 +117,7 @@
     <a href="login.html" class="logout-btn">Sair</a>
   </div>
 
-  <div class="content">
+  <main>
     <h3>Informações de Passageiros</h3>
     <table>
       <thead>
@@ -138,7 +152,7 @@
 
     <h3>Mapa em Tempo Real</h3>
     <div id="map" class="map"></div>
-  </div>
+  </main>
 
   <footer>&copy; 2025 DOIN. Todos os direitos reservados.</footer>
 
