@@ -94,6 +94,26 @@
       font-size: 0.9rem;
     }
 
+    .buttons {
+      margin-top: 15px;
+    }
+
+    .buttons button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #45a049;
+    }
+
     @media (max-width: 480px) {
       header h1 {
         font-size: 1.8rem;
@@ -114,6 +134,10 @@
       }
     }
   </style>
+
+  <!-- Include the necessary libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header>
@@ -127,7 +151,7 @@
 
   <div class="content">
     <h3>Relatório de Riscos:</h3>
-    <table>
+    <table id="relatorioTable">
       <thead>
         <tr>
           <th>Linha</th>
@@ -151,6 +175,34 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Buttons to export the report -->
+    <div class="buttons">
+      <button onclick="exportToExcel()">Exportar para Excel</button>
+      <button onclick="exportToPDF()">Exportar para PDF</button>
+    </div>
   </div>
+
+  <script>
+    // Export to Excel function
+    function exportToExcel() {
+      const table = document.getElementById("relatorioTable");
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Relatório de Riscos" });
+      XLSX.writeFile(wb, "relatorio_de_riscos.xlsx");
+    }
+
+    // Export to PDF function
+    function exportToPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Add title
+      doc.text("Relatório de Riscos", 20, 20);
+      // Add table from the HTML
+      doc.autoTable({ html: '#relatorioTable', startY: 30 });
+      // Save the PDF
+      doc.save('relatorio_de_riscos.pdf');
+    }
+  </script>
 </body>
 </html>
